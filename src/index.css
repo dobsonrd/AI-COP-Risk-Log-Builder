@@ -1,0 +1,168 @@
+/* Tailwind utilities only — no base/preflight (NHS UK CSS provides the reset) */
+@tailwind utilities;
+
+/* ============================================================
+   App-specific overrides and custom components
+   ============================================================ */
+
+/* Wider container for the risk log table */
+.app-width-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .app-width-container {
+    padding: 0 24px;
+  }
+}
+
+/* Step indicator for wizard */
+.app-step-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+
+.app-step-list__item {
+  display: flex;
+  align-items: center;
+  color: #4c6272;
+  font-size: 14px;
+}
+
+.app-step-list__item::after {
+  content: "›";
+  margin: 0 10px;
+  color: #aeb7bd;
+}
+
+.app-step-list__item:last-child::after {
+  display: none;
+}
+
+.app-step-list__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #d8dde0;
+  color: #4c6272;
+  font-weight: 700;
+  font-size: 13px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.app-step-list__item--done .app-step-list__number {
+  background-color: #007f3b;
+  color: white;
+}
+
+.app-step-list__item--current {
+  color: #212b32;
+  font-weight: 700;
+}
+
+.app-step-list__item--current .app-step-list__number {
+  background-color: #005eb8;
+  color: white;
+}
+
+/* Score tags in table (compact override) */
+.app-score-tag {
+  min-width: 2.25rem;
+  text-align: center;
+  cursor: default;
+}
+
+/* Progress bar */
+.app-progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #d8dde0;
+  display: flex;
+}
+
+.app-progress-bar__segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Clickable table rows */
+.app-table-row--clickable {
+  cursor: pointer;
+}
+
+.app-table-row--clickable:hover {
+  background-color: #f0f4f5;
+}
+
+.app-table-row--faded td {
+  opacity: 0.45;
+}
+
+/* Inline score selector — compact radio groups */
+.app-score-radios .nhsuk-radios__item {
+  display: inline-flex;
+  margin-bottom: 0;
+  margin-right: 4px;
+}
+
+.app-score-radios .nhsuk-radios__input + .nhsuk-label::before {
+  width: 36px;
+  height: 36px;
+}
+
+.app-score-radios .nhsuk-radios__input:checked + .nhsuk-label::before {
+  background-color: #005eb8;
+}
+
+.app-score-radios .nhsuk-radios__input + .nhsuk-label::after {
+  top: 10px;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Footer */
+.app-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #d8dde0;
+}
+
+/* Notification banner inline (save confirmation) */
+.app-save-banner {
+  background-color: #007f3b;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Dense table for risk log — consistent 14px across all cells */
+.app-table--dense .nhsuk-table__cell,
+.app-table--dense .nhsuk-table__header {
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Section dividers for risk detail page */
+.app-section-divider {
+  border-top: 3px solid #005eb8;
+  padding-top: 20px;
+  margin-top: 32px;
+  margin-bottom: 20px;
+}
