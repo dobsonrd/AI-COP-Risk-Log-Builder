@@ -38,7 +38,7 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
       <header className="nhsuk-header" data-module="nhsuk-header" role="banner">
         <div className="nhsuk-header__container nhsuk-width-container">
           <div className="nhsuk-header__service">
-            <a className="nhsuk-header__service-logo" href="/" aria-label="NHS AI Risk Log Builder homepage">
+            <a className="nhsuk-header__service-logo" href="https://dobsonrd.github.io/AI-COP-Risk-Log-Builder/#" aria-label="NHS AI Risk Log Builder homepage">
               <NHSLogo />
               <span className="nhsuk-header__service-name">AI Risk Log Builder</span>
             </a>
