@@ -6,9 +6,10 @@ import Layout from './Layout';
 interface Props {
   onNewProject: () => void;
   onOpenProject: (id: string) => void;
+  onViewLibrary: () => void;
 }
 
-export default function ProjectList({ onNewProject, onOpenProject }: Props) {
+export default function ProjectList({ onNewProject, onOpenProject, onViewLibrary }: Props) {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => { setProjects(getProjects()); }, []);
@@ -40,6 +41,13 @@ export default function ProjectList({ onNewProject, onOpenProject }: Props) {
         <div className="nhsuk-grid-column-full">
           <button className="nhsuk-button" onClick={onNewProject}>
             Create new project
+          </button>
+          <button
+            className="nhsuk-button nhsuk-button--secondary"
+            onClick={onViewLibrary}
+            style={{ marginLeft: '16px' }}
+          >
+            View risk library
           </button>
         </div>
       </div>
