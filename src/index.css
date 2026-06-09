@@ -133,6 +133,12 @@
   height: 16px;
 }
 
+/* Align breadcrumb text with grid-column content (which adds 16px padding) */
+.nhsuk-breadcrumb .nhsuk-width-container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 /* Footer */
 .app-footer {
   margin-top: 40px;
