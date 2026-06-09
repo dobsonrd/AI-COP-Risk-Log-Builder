@@ -48,7 +48,7 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
 
       {breadcrumbs && breadcrumbs.length > 0 && (
         <nav className="nhsuk-breadcrumb" aria-label="Breadcrumb">
-          <div className={containerClass}>
+          <div className="nhsuk-width-container">
             <ol className="nhsuk-breadcrumb__list">
               {breadcrumbs.map((c, i) => (
                 <li key={i} className="nhsuk-breadcrumb__list-item">
@@ -57,18 +57,19 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
                       {c.label}
                     </a>
                   ) : (
-                    <span>{c.label}</span>
+                    <span className="nhsuk-breadcrumb__last" aria-current="page">{c.label}</span>
                   )}
                 </li>
               ))}
             </ol>
-            {/* Mobile back link — shows last clickable crumb */}
             {breadcrumbs.length > 1 && (() => {
               const prev = [...breadcrumbs].reverse().find(c => c.onClick);
               return prev ? (
-                <a className="nhsuk-back-link" onClick={prev.onClick} href="#" role="button">
-                  <span className="nhsuk-u-visually-hidden">Back to </span>{prev.label}
-                </a>
+                <p className="nhsuk-breadcrumb__back">
+                  <a className="nhsuk-breadcrumb__backlink" onClick={prev.onClick} href="#" role="button">
+                    <span className="nhsuk-u-visually-hidden">Back to </span>{prev.label}
+                  </a>
+                </p>
               ) : null;
             })()}
           </div>
