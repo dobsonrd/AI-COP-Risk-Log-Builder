@@ -57,7 +57,7 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
                       {c.label}
                     </a>
                   ) : (
-                    <span className="nhsuk-breadcrumb__last" aria-current="page">{c.label}</span>
+                    <span aria-current="page">{c.label}</span>
                   )}
                 </li>
               ))}
@@ -65,11 +65,9 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
             {breadcrumbs.length > 1 && (() => {
               const prev = [...breadcrumbs].reverse().find(c => c.onClick);
               return prev ? (
-                <p className="nhsuk-breadcrumb__back">
-                  <a className="nhsuk-breadcrumb__backlink" onClick={prev.onClick} href="#" role="button">
-                    <span className="nhsuk-u-visually-hidden">Back to </span>{prev.label}
-                  </a>
-                </p>
+                <a className="nhsuk-back-link" onClick={prev.onClick} href="#" role="button">
+                  <span className="nhsuk-u-visually-hidden">Back to </span>{prev.label}
+                </a>
               ) : null;
             })()}
           </div>
