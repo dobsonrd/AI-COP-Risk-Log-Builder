@@ -40,7 +40,7 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
           <div className="nhsuk-header__service">
             <a className="nhsuk-header__service-logo" href="https://dobsonrd.github.io/AI-COP-Risk-Log-Builder/#" aria-label="NHS AI Risk Log Builder homepage">
               <NHSLogo />
-              <span className="nhsuk-header__service-name">AI Risk Log Builder <span style={{fontSize: '0.75em', fontWeight: 400, opacity: 0.85}}>(draft - in development)</span></span>
+              <span className="nhsuk-header__service-name">AI Risk Log Builder (draft - in development)</span>
             </a>
           </div>
         </div>
@@ -85,10 +85,7 @@ export default function Layout({ children, breadcrumbs, wide = false }: Props) {
         <div className="nhsuk-footer app-footer" id="nhsuk-footer">
           <div className="nhsuk-width-container">
             <p className="nhsuk-footer__copyright nhsuk-body-s" style={{ color: '#4c6272' }}>
-              NHS AI Quality Community of Practice — Risk Log Builder &nbsp;·&nbsp; Data stored locally in your browser only
-            </p>
-            <p className="nhsuk-body-xs" style={{ color: '#768692', marginTop: '4px' }}>
-              v{__APP_VERSION__} &nbsp;·&nbsp; Built {__BUILD_DATE__}
+              NHS AI Quality Community of Practice — Risk Log Builder &nbsp;·&nbsp; Data stored locally in your browser only &nbsp;·&nbsp; v{__APP_VERSION__} built {__BUILD_DATE__}
             </p>
           </div>
         </div>
