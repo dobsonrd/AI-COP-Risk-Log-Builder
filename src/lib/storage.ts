@@ -28,3 +28,21 @@ export function deleteProject(id: string): void {
   const projects = getProjects().filter(p => p.id !== id);
   localStorage.setItem(KEY, JSON.stringify(projects));
 }
+
+export function importProject(raw: unknown): Project {
+  const p = raw as Project;
+  if (!p || typeof p !== 'object' || !p.name || !Array.isArray(p.risks)) {
+    throw new Error('Invalid project file — missing required fields.');
+  }
+  const existing = getProjects();
+  const idTaken = existing.some(e => e.id === p.id);
+  const project: Project = {
+    ...p,
+    id: idTaken ? `proj-${Date.now()}-${Math.random().toString(36).slice(2, 7)}` : p.id,
+    name: idTaken ? `${p.name} (imported)` : p.name,
+    updatedAt: new Date().toISOString(),
+  };
+  existing.push(project);
+  localStorage.setItem(KEY, JSON.stringify(existing));
+  return project;
+}

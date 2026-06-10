@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getProjects, deleteProject } from '../lib/storage';
+import { useState, useEffect, useRef } from 'react';
+import { getProjects, deleteProject, importProject } from '../lib/storage';
 import type { Project } from '../types';
 import Layout from './Layout';
 
@@ -11,8 +11,29 @@ interface Props {
 
 export default function ProjectList({ onNewProject, onOpenProject, onViewLibrary }: Props) {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [importError, setImportError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { setProjects(getProjects()); }, []);
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!fileInputRef.current) return;
+    fileInputRef.current.value = '';
+    if (!file) return;
+    setImportError(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result as string);
+        importProject(parsed);
+        setProjects(getProjects());
+      } catch (err) {
+        setImportError(err instanceof Error ? err.message : 'Could not read file.');
+      }
+    };
+    reader.readAsText(file);
+  };
 
   const handleDelete = (e: React.MouseEvent, id: string, name: string) => {
     e.stopPropagation();
@@ -44,6 +65,20 @@ export default function ProjectList({ onNewProject, onOpenProject, onViewLibrary
           </button>
           <button
             className="nhsuk-button nhsuk-button--secondary"
+            onClick={() => fileInputRef.current?.click()}
+            style={{ marginLeft: '16px' }}
+          >
+            Import project
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json,application/json"
+            style={{ display: 'none' }}
+            onChange={handleImport}
+          />
+          <button
+            className="nhsuk-button nhsuk-button--secondary"
             onClick={onViewLibrary}
             style={{ marginLeft: '16px' }}
           >
@@ -51,6 +86,19 @@ export default function ProjectList({ onNewProject, onOpenProject, onViewLibrary
           </button>
         </div>
       </div>
+
+      {importError && (
+        <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-column-two-thirds">
+            <div className="nhsuk-error-summary" aria-labelledby="import-error-title" role="alert">
+              <h2 className="nhsuk-error-summary__title" id="import-error-title">Import failed</h2>
+              <div className="nhsuk-error-summary__body">
+                <p className="nhsuk-body">{importError}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {projects.length === 0 ? (
         <div className="nhsuk-grid-row">
